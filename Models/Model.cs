@@ -1,8 +1,9 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using thirdCarDealership.Models;
+using AThirdCarDealership.Models;
 
-namespace AthirdCarDealership.Models
+
+namespace AThirdCarDealership.Models
 {
     [Table("Models")]
     public class Model

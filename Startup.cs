@@ -2,9 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AThirdCarDealership.Persistence;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.Webpack;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -23,8 +25,8 @@ namespace AThirdCarDealership
         public void ConfigureServices(IServiceCollection services)
         {
 
-        //    services.AddDbContext<ApplicationDbContext>(options =>
-          //      options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<VegaDbContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddMvc();
         }
 

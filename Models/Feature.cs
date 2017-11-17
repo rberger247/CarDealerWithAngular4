@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace AthirdCarDealership.Models
+namespace AThirdCarDealership.Models
 {
     public class Feature
     {

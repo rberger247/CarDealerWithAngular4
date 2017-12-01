@@ -4,7 +4,7 @@
     <label for="make">Make</label>
 
 
-        <select id="make" class="form-control" (change)="onMakeChange()" [(ngModel)]="vehicle.make" name="make">
+        <select id="make" class="form-control" (change)="onMakeChange(vehicle.make)" [(ngModel)]="vehicle.make" name="make">
           <option value="">{{vehicle.make}}</option>
       <option *ngFor="let m of makes" value="{{ m.id }}">{{ m.name }}</option>
     </select>

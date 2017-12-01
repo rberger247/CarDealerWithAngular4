@@ -1,8 +1,9 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+//import { UniversalModule } from 'angular2-universal';
 
 import { VehicleService } from './services/vehicleService';
 import { AppComponent } from './components/app/app.component';
@@ -26,6 +27,7 @@ import { VehicleFormComponent } from "./components/vehicleform/vehicleform.compo
     ],
     imports: [
         CommonModule,
+      //  UniversalModule,
         HttpModule,
         FormsModule,
         RouterModule.forRoot([

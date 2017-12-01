@@ -16,7 +16,7 @@ stopping the run.
 
 ----------Features and methodologies used ----------------
 
-Has a bootstrap form with dropdowns populated by values from database
+Has a bootstrap form with dropdowns populated by values from database.
 Uses angular two-way data binding to connect values of different dropdowns
 
 

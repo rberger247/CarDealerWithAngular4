@@ -2,6 +2,7 @@
 
 
 using AThirdCarDealership.Models;
+using vega.Models;
 
 namespace AThirdCarDealership.Persistence
 {
@@ -14,6 +15,20 @@ namespace AThirdCarDealership.Persistence
 
         public DbSet<Make> Makes { get; set; }
         public DbSet<Feature> Features { get; set; }
+        public DbSet<VehicleFeature> VehicleFeatures { get; set; }
+
         public DbSet<AThirdCarDealership.Models.Model> Model { get; set; }
+protected override void OnModelCreating(ModelBuilder builder)
+        {
+
+            builder.Entity<VehicleFeature>().HasKey(
+
+                vf => new { vf.VehicleId, vf.FeatureId });
+
+        }
+public DbSet<vega.Models.Vehicle> Vehicle { get; set; }
+
+
     }
+    
 }

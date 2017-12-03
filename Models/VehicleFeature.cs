@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using AThirdCarDealership.Models;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace vega.Models
 {

@@ -18,6 +18,7 @@ stopping the run.
 
 Has a bootstrap form with dropdowns populated by values from database.
 Uses angular two-way data binding to connect values of different dropdowns
+Uses AutoMapper to map objects 
 
 
 

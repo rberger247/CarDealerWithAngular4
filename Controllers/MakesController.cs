@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using AThirdCarDealership.Models;
 using AThirdCarDealership.Persistence;
+using AutoMapper;
+using AThirdCarDealership.Controllers.Resources;
 
 namespace AThirdCarDealership.Controllers
 {
@@ -15,17 +17,30 @@ namespace AThirdCarDealership.Controllers
     public class MakesController : Controller
     {
         private readonly VegaDbContext _context;
+        private readonly IMapper mapper;
 
-        public MakesController(VegaDbContext context)
+        public MakesController(VegaDbContext context, IMapper mapper)
         {
             _context = context;
+            this.mapper = mapper;
         }
 
         // GET: api/Makes
+//        [HttpGet]
+//        public IEnumerable<Make> GetMakes()
+//        {
+
+//var makes = await
+//            return _context.Makes;
+//        }
+
         [HttpGet]
-        public IEnumerable<Make> GetMakes()
+        public  async Task   <IEnumerable<MakeResource>> GetMakes()
         {
-            return _context.Makes;
+
+            var makes = await _context.Makes.Include(m => m.Models).ToListAsync();
+
+            return mapper.Map<List<Make>, List<MakeResource>>(makes);
         }
 
         // GET: api/Makes/5

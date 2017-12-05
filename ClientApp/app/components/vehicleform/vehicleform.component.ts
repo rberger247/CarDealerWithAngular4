@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, TemplateRef, ViewContainerRef } from '@angular/core';
 
-
+import { SaveVehicle, Vehicle } from './../../models/vehicle';
 
 import { VehicleService } from "../../Services/VehicleService";
 
@@ -21,9 +21,23 @@ export class VehicleFormComponent implements OnInit {
     makes: any[];
     models: any[];
     features: any[];
-    vehicle: any = {};
-    selectedName: object = {};
+    vehicle: any[];
+    //vehicle: SaveVehicle = {
+    //    id: 0,
+    //    makeId: 0,
+    //    modelId: 0,
+    //    isRegistered: false,
+    //    features: [],
+    //    contact: {
+    //        name: '',
+    //        email: '',
+    //        phone: '',
+    //    }
+
+    //};
+
    
+    @ViewChild("vc", { read: ViewContainerRef }) vc: ViewContainerRef;
    
     constructor(private vehicleService: VehicleService) {}
 
@@ -39,13 +53,20 @@ export class VehicleFormComponent implements OnInit {
         this.vehicleService.getFeatures().subscribe(features =>
             this.features = features);
     }
+    submit() {
 
-    onMakeChange() {
-        var selectedMake = this.makes.find(m => m.makeid == this.vehicle.Name);
-        console.log(this.makes)
-       //this.models = selectedMake ? selectedMake.models: [];
-      //  console.log(selectedMake.name);
+
+
+    }
+
+    //onMakeChange() {
+    //    var selectedMake = this.makes.find(m => m.makeid == this.vehicle.Name);
+    //    console.log(this.makes)
+    //    var opt = "<option value='8'>Beer</option>";
+
+    //   //this.models = selectedMake ? selectedMake.models: [];
+    //  //  console.log(selectedMake.name);
        
      
-    }
+    //}
 }

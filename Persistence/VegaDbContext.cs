@@ -13,10 +13,12 @@ namespace AThirdCarDealership.Persistence
         {
         }
         public DbSet<Model> Models { get; set; }
+        public DbSet<Vehicle> Vehicles { get; set; }
 
         public DbSet<Make> Makes { get; set; }
         public DbSet<Feature> Features { get; set; }
         public DbSet<VehicleFeature> VehicleFeatures { get; set; }
+        public DbSet<vega.Models.Vehicle> Vehicle { get; set; }
 
         public DbSet<AThirdCarDealership.Models.Model> Model { get; set; }
 protected override void OnModelCreating(ModelBuilder builder)
@@ -27,7 +29,7 @@ protected override void OnModelCreating(ModelBuilder builder)
                 vf => new { vf.VehicleId, vf.FeatureId });
 
         }
-public DbSet<vega.Models.Vehicle> Vehicle { get; set; }
+
 
 
     }

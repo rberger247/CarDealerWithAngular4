@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using AThirdCarDealership.Models;
 using AThirdCarDealership.Persistence;
+using AThirdCarDealership.Controllers.Resources;
+using AutoMapper;
 
 namespace AThirdCarDealership.Controllers
 {
@@ -15,10 +17,12 @@ namespace AThirdCarDealership.Controllers
     public class ModelsController : Controller
     {
         private readonly VegaDbContext _context;
+        private readonly IMapper mapper;
 
-        public ModelsController(VegaDbContext context)
+        public ModelsController(VegaDbContext context, IMapper mapper)
         {
             _context = context;
+            this.mapper = mapper;
         }
 
         // GET: api/Models
@@ -29,23 +33,58 @@ namespace AThirdCarDealership.Controllers
         }
 
         // GET: api/Models/5
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetModel([FromRoute] int id)
+        //[HttpGet("{id}")]
+        //public async Task<IActionResult> GetModel([FromRoute] int id)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
+
+        //    var model = await _context.Model.SingleOrDefaultAsync(m => m.Id == id);
+
+        //    if (model == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    return Ok(model);
+        //}
+
+
+        [HttpGet("getbyMake/{id}")]
+        public  List<Model> GetModelsByMake([FromRoute] int id)
         {
-            if (!ModelState.IsValid)
+            //    if (!ModelState.IsValid)
+            //    {
+            //        return BadRequest(ModelState);
+            //    } 
+
+
+            List<Model> oList = new List<Model>();
+            var modelList =  _context.Model.Where(m => m.MakeId == id).ToList();
+
+            foreach (var model in modelList)
             {
-                return BadRequest(ModelState);
+
+                Model oModel = new Model() {
+
+                    Name = model.Name,
+                    Id = model.Id
+
+                };
+                oList.Add(oModel);
+
             }
 
-            var model = await _context.Model.SingleOrDefaultAsync(m => m.Id == id);
+         
+            
 
-            if (model == null)
-            {
-                return NotFound();
-            }
 
-            return Ok(model);
+
+             return oList;
         }
+
 
         // PUT: api/Models/5
         [HttpPut("{id}")]

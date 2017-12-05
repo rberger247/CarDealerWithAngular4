@@ -143,8 +143,13 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using vega.Controllers.Resources;
+
 using AThirdCarDealership.Persistence;
 using AThirdCarDealership.Controllers.Resources;
 using AThirdCarDealership.Models;

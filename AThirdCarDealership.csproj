@@ -27,16 +27,14 @@
 
   <ItemGroup>
     <None Remove="ClientApp\app\components\shared\pagination.component.ts" />
+    <None Remove="ClientApp\app\models\vehicle.ts" />
     <None Remove="ClientApp\app\Services\VehicleService.ts" />
   </ItemGroup>
 
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\app\components\shared\pagination.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\models\vehicle.ts" />
     <TypeScriptCompile Include="ClientApp\app\Services\VehicleService.ts" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="ClientApp\app\models\" />
   </ItemGroup>
 
   <Target Name="DebugRunWebpack" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('wwwroot\dist') ">

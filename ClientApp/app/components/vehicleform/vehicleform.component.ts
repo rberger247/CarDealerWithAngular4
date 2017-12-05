@@ -1,6 +1,6 @@
-import { Component, OnInit, ViewChild, TemplateRef, ViewContainerRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
-import { SaveVehicle, Vehicle } from './../../models/vehicle';
+
 
 import { VehicleService } from "../../Services/VehicleService";
 
@@ -21,24 +21,17 @@ export class VehicleFormComponent implements OnInit {
     makes: any[];
     models: any[];
     features: any[];
-    vehicle: any[];
-    //vehicle: SaveVehicle = {
-    //    id: 0,
-    //    makeId: 0,
-    //    modelId: 0,
-    //    isRegistered: false,
-    //    features: [],
-    //    contact: {
-    //        name: '',
-    //        email: '',
-    //        phone: '',
-    //    }
+    vehicle: any = {
+        features: [],
+        contact: {
 
-    //};
+        }
+
+    };
 
    
-    @ViewChild("vc", { read: ViewContainerRef }) vc: ViewContainerRef;
-   
+
+
     constructor(private vehicleService: VehicleService) {}
 
     ngOnInit() {
@@ -53,20 +46,25 @@ export class VehicleFormComponent implements OnInit {
         this.vehicleService.getFeatures().subscribe(features =>
             this.features = features);
     }
-    submit() {
+    onMakeChange() {
+        this.populateModels();
 
-
-
+        delete this.vehicle.modelId;
+    }
+    private populateModels() {
+        var selectedMake = this.makes.find(m => m.id == this.vehicle.makeId);
+        this.models = selectedMake ? selectedMake.models : [];
     }
 
-    //onMakeChange() {
-    //    var selectedMake = this.makes.find(m => m.makeid == this.vehicle.Name);
-    //    console.log(this.makes)
-    //    var opt = "<option value='8'>Beer</option>";
+    onFeatureToggle(featureId: any, $event: any) {
+        if ($event.target.checked)
+            this.vehicle.features.push(featureId);
+        else {
+            var index = this.vehicle.features.indexOf(featureId);
+            this.vehicle.features.splice(index, 1);
+        }
+    }
 
-    //   //this.models = selectedMake ? selectedMake.models: [];
-    //  //  console.log(selectedMake.name);
-       
-     
-    //}
+   
+
 }

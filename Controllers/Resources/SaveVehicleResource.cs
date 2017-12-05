@@ -1,11 +1,9 @@
-﻿using System;
+﻿using AThirdCarDealership.Controllers.Resources;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace AThirdCarDealership.Controllers.Resources
+namespace vega.Controllers.Resources
 {
     public class SaveVehicleResource
     {

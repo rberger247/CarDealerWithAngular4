@@ -17,8 +17,18 @@ export class VehicleService {
         return this.http.get('/api/makes')
             .map(res => res.json());
     }
+    create(vehicle : any) {
+        return this.http.post('/api/vehicles', vehicle)
+            .map(res => res.json());
+    }
     //create(vehicle) {
     //    return this.http.post(this.vehiclesEndpoint, vehicle)
+    //        .map(res => res.json());
+    //}
+
+
+    //update(vehicle: SaveVehicle) {
+    //    return this.http.put('/api/vehicles/' + vehicle.id, vehicle)
     //        .map(res => res.json());
     //}
     getModels() {

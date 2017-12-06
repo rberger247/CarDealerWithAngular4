@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import{ ToastyModule} from 'ng2-toasty'
 //import { UniversalModule } from 'angular2-universal';
 
 import { VehicleService } from './services/vehicleService';
@@ -19,6 +20,7 @@ import { VehicleFormComponent } from "./components/vehicleform/vehicleform.compo
 @NgModule({
     declarations: [
         AppComponent,
+
         NavMenuComponent,
         CounterComponent,
         FetchDataComponent,
@@ -28,6 +30,7 @@ import { VehicleFormComponent } from "./components/vehicleform/vehicleform.compo
     imports: [
         CommonModule,
       //  UniversalModule,
+        ToastyModule.forRoot(),
         HttpModule,
         FormsModule,
         RouterModule.forRoot([

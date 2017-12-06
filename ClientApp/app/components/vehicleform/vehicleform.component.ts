@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-
+import { ToastyService } from "ng2-toasty";
 
 import { VehicleService } from "../../Services/VehicleService";
 
@@ -32,7 +32,9 @@ export class VehicleFormComponent implements OnInit {
    
 
 
-    constructor(private vehicleService: VehicleService) {}
+    constructor(private vehicleService: VehicleService,
+        private toastyService: ToastyService
+  ) { }
 
     ngOnInit() {
         this.vehicleService.getMakes().subscribe(makes =>
@@ -46,6 +48,32 @@ export class VehicleFormComponent implements OnInit {
         this.vehicleService.getFeatures().subscribe(features =>
             this.features = features);
     }
+
+    submit() {
+        this.vehicleService.create(this.vehicle).subscribe(
+            x => console.log(x),
+            err => {
+                this.toastyService.error({
+                    title: 'error',
+                    msg: 'an unexpected error',
+                    theme: 'bootstrap',
+                    showClose: true,
+                    timeout: 5000
+
+                });
+
+
+            });
+
+}
+  
+
+           
+            
+
+
+
+      
     onMakeChange() {
         this.populateModels();
 
@@ -53,7 +81,11 @@ export class VehicleFormComponent implements OnInit {
     }
     private populateModels() {
         var selectedMake = this.makes.find(m => m.id == this.vehicle.makeId);
-        this.models = selectedMake ? selectedMake.models : [];
+        this.models =
+            //selectedMake
+           // ?
+            selectedMake.models
+        //: [];
     }
 
     onFeatureToggle(featureId: any, $event: any) {

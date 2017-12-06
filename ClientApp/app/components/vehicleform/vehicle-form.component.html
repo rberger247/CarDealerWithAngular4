@@ -1,17 +1,22 @@
 <h1>New Vehicle</h1>
 
 {{vehicle | json}}
-<form ng-submit="submit()">
-  <div class="form-group">
-    <label for="make">Make</label>
+<form  #f="ngForm" (ngSubmit)="submit()">
 
+    <div class="form-group">
 
-        <select id="make" class="form-control" (change)="onMakeChange()"[(ngModel)]="vehicle.makeId" name="makeId" required #make="ngModel">
-          <option value=""></option>
-      <option *ngFor="let m of makes" value="{{ m.id }}">{{ m.name }}</option>
-    </select>
+        <label for="make">Make</label>
+
+        <select id="make" class="form-control" (change)="onMakeChange()" [(ngModel)]="vehicle.makeId" name="makeId" required #maked="ngModel">
+            <option value=""></option>
+            <option *ngFor="let m of makes" value="{{ m.id }}">{{ m.name }}</option>
+    
+        </select>
+        <div class="alert alert-danger" *ngIf="maked.touched && !maked.valid">Please specify the make.</div>
+    
   </div>
-
+   
+   
     <label for="model">Model</label>
 
 
@@ -47,9 +52,9 @@
   </div>
   <div class="form-group">
     <label for="contactEmail">Email</label>
-    <input id="contactEmail" type="text"  [(ngModel)]="vehicle.contact.Email"name="contactEmai"class="form-control">
+    <input id="contactEmail" type="text"  [(ngModel)]="vehicle.contact.Email"name="contactEmail"class="form-control">
   </div>
-  <button class="btn btn-primary">Save</button>
-
+  <!--<button   [disabled]="!f.valid" class="btn btn-primary">Save</button>-->
+    <button  class="btn btn-primary">Save</button>
   <a href="https://www.google.com/">some text</a>
 </form>

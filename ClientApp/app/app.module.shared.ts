@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { NgModule } from '@angular/core';
+import { NgModule, ErrorHandler } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import * as Raven  from 'raven-js';
 import{ ToastyModule} from 'ng2-toasty'
 //import { UniversalModule } from 'angular2-universal';
 
@@ -13,8 +14,10 @@ import { HomeComponent } from './components/home/home.component';
 import { FetchDataComponent } from './components/fetchdata/fetchdata.component';
 import { CounterComponent } from './components/counter/counter.component';
 import { VehicleFormComponent } from "./components/vehicleform/vehicleform.component";
+import { AppErrorHandler } from "./app.error-handler";
 
-
+Raven.config('https://fa7751a1fbec47a695a2db3339a196c9@sentry.io/255301')
+  .install();
 
 
 @NgModule({
@@ -44,6 +47,7 @@ import { VehicleFormComponent } from "./components/vehicleform/vehicleform.compo
 
     ],
     providers: [
+        { provide: ErrorHandler, useClass: AppErrorHandler },
         VehicleService
     ]
 })

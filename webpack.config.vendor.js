@@ -14,7 +14,9 @@ const treeShakableModules = [
     'ng2-toasty',
     'ng2-toasty/bundles/style-bootstrap.css',
     '@angular/router',
+    'raven-js',
     'zone.js',
+
 ];
 const nonTreeShakableModules = [
     'bootstrap',

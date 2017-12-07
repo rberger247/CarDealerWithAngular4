@@ -11,10 +11,12 @@ const treeShakableModules = [
     '@angular/http',
     '@angular/platform-browser',
     '@angular/platform-browser-dynamic',
+  
     'ng2-toasty',
     'ng2-toasty/bundles/style-bootstrap.css',
     '@angular/router',
     'raven-js',
+    'underscore',
     'zone.js',
 
 ];

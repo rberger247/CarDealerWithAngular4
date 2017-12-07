@@ -11,6 +11,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using AutoMapper;
 using AThirdCarDealership.Core;
+using vega.Core;
+using vega.Persistence;
 
 namespace AThirdCarDealership
 {
@@ -27,7 +29,7 @@ namespace AThirdCarDealership
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddScoped<IvehicleRepository, VehicleRepository>();
+            services.AddScoped<IVehicleRepository, VehicleRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddAutoMapper();
             services.AddDbContext<VegaDbContext>(options =>

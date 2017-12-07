@@ -1,17 +1,32 @@
-﻿using System;
+﻿//using System;
+//using System.Collections.Generic;
+//using System.Linq;
+//using System.Threading.Tasks;
+//using vega.Models;
+
+//namespace AThirdCarDealership.Core
+//{
+//   public interface IvehicleRepository
+//    {
+
+//        Task<Vehicle> GetVehicle(int id, bool includeRelated = true);
+//        void add(Vehicle vehicle);
+
+//        void Remove(Vehicle vehicle);
+//    }
+//}
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
+using vega.Core.Models;
 using vega.Models;
 
-namespace AThirdCarDealership.Core
+namespace vega.Core
 {
-   public interface IvehicleRepository
+    public interface IVehicleRepository
     {
-
         Task<Vehicle> GetVehicle(int id, bool includeRelated = true);
-        void add(Vehicle vehicle);
-
+        void Add(Vehicle vehicle);
         void Remove(Vehicle vehicle);
+        Task<QueryResult<Vehicle>> GetVehicles(VehicleQuery filter);
     }
 }

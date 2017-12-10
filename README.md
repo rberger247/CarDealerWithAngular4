@@ -4,6 +4,7 @@
 
 This is a console app in asp.Net core 2.0 
 It uses EntityFrameworkCore to connect to SqlServer Database
+added Toasty notifications
 AngularCli version 1.5 
 Angular 4.2.5
 It uses EntityFrameworkCore to connect to SqlServer Database

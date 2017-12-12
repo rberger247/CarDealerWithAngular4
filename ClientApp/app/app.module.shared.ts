@@ -39,7 +39,7 @@ Raven.config('https://fa7751a1fbec47a695a2db3339a196c9@sentry.io/255301')
         HttpModule,
         FormsModule,
         RouterModule.forRoot([
-            { path: '', redirectTo: 'vehicles', pathMatch: 'full' },
+            //{ path: '', redirectTo: 'vehicles', pathMatch: 'full' },
             { path: 'vehicles/new', component: VehicleFormComponent },
             { path: 'vehicles/:id', component: VehicleFormComponent },
             { path: 'vehicles', component: VehicleListComponent },
@@ -48,7 +48,7 @@ Raven.config('https://fa7751a1fbec47a695a2db3339a196c9@sentry.io/255301')
             { path: 'counter', component: CounterComponent },
             { path: 'fetch-data', component: FetchDataComponent },
           
-            { path: '**', redirectTo: 'home' }
+            { path: '**', redirectTo: 'vehicles' }
         ])
 
     ],

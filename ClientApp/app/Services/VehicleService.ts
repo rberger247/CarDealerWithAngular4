@@ -24,25 +24,25 @@ export class VehicleService {
     }
 
     getVehicle(id: any) {
-        return this.http.get(this.vehiclesEndpoint + '/' + id)
+        return this.http.get('http://localhost:55866/api/vehicles' + '/' + id)
             .map(res => res.json());
     }
 
-    getVehicles(filter: any) {
-        return this.http.get(this.vehiclesEndpoint + '?' + this.toQueryString(filter))
+    GetVehicles() {
+        return this.http.get(this.vehiclesEndpoint )
             .map(res => res.json());
     }
 
-    toQueryString(obj: any) {
-        var parts = [];
-        for (var property in obj) {
-            var value = obj[property];
-            if (value != null && value != undefined)
-                parts.push(encodeURIComponent(property) + '=' + encodeURIComponent(value));
-        }
+    ////toQueryString(obj: any) {
+    ////    var parts = [];
+    ////    for (var property in obj) {
+    ////        var value = obj[property];
+    ////        if (value != null && value != undefined)
+    ////            parts.push(encodeURIComponent(property) + '=' + encodeURIComponent(value));
+    ////    }
 
-        return parts.join('&');
-    }
+    //    return parts.join('&');
+    //}
 
     update(vehicle: SaveVehicle) {
         return this.http.put(this.vehiclesEndpoint + '/' + vehicle.id, vehicle)
@@ -53,4 +53,6 @@ export class VehicleService {
         return this.http.delete(this.vehiclesEndpoint + '/' + id)
             .map(res => res.json());
     }
+
+  
 }

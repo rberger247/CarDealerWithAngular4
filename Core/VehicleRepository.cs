@@ -1,79 +1,4 @@
-﻿////using AThirdCarDealership.Core.Models;
-////using System;
-////using System.Collections.Generic;
-////using System.Linq;
-////using System.Threading.Tasks;
-
-
-////namespace AThirdCarDealership.Core
-////{
-
-////        public interface IVehicleRepository
-////        {
-////            Task<Vehicle> GetVehicle(int id, bool includeRelated = true);
-////            void Add(Vehicle vehicle);
-////            void Remove(Vehicle vehicle);
-////        }
-
-////}
-
-//using AThirdCarDealership.Persistence;
-//using Microsoft.EntityFrameworkCore;
-//using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Threading.Tasks;
-//using vega.Core;
-//using vega.Models;
-
-//namespace AThirdCarDealership.Core
-//{
-
-//    public class VehicleRepository : IVehicleRepository
-//    {
-
-//        private readonly  VegaDbContext context;
-//        public VehicleRepository(VegaDbContext context)
-//        {
-
-//               this.context = context;
-//        }
-
-//        public VegaDbContext Context { get; }
-
-//        public async Task <Vehicle> GetVehicle(int id, bool includeRelated = true)
-//        {
-
-//            if (!includeRelated)
-//                return await context.Vehicles.FindAsync(id);
-
-//            return await context.Vehicles
-
-//              .Include(v => v.Model)
-//                .ThenInclude(m => m.Make).Include(v => v.Features)
-//            .ThenInclude(vf => vf.Feature)
-//              .SingleOrDefaultAsync(v => v.Id == id);
-
-
-//        }
-
-//     public   void Remove(Vehicle vehicle) {
-//            context.Vehicle.Remove(vehicle);
-
-//        }
-//     public   void add(Vehicle vehicle)
-//        {
-//            context.Vehicle.Add(vehicle);
-
-//        }
-
-
-
-
-//    }
-
-
-//}
+﻿
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -121,40 +46,50 @@ namespace vega.Persistence
             context.Remove(vehicle);
         }
 
-        public async Task<QueryResult<Vehicle>> GetVehicles(VehicleQuery queryObj)
+        public async Task<IEnumerable<Vehicle>> GetVehicles()
         {
-            var result = new QueryResult<Vehicle>();
+            return await context.Vehicles.Include(v => v.Model)
+                .ThenInclude(vf => vf.Make)
+              .Include(m => m.Features)
+                .ThenInclude(m => m.Feature)
+             .ToListAsync();
 
-            var query = context.Vehicles
-              .Include(v => v.Model)
-                .ThenInclude(m => m.Make)
-              .Include(v => v.Features)
-                .ThenInclude(vf => vf.Feature)
-              .AsQueryable();
-
-            if (queryObj.MakeId.HasValue)
-                query = query.Where(v => v.Model.MakeId == queryObj.MakeId.Value);
-
-            if (queryObj.ModelId.HasValue)
-                query = query.Where(v => v.ModelId == queryObj.ModelId.Value);
-
-            var columnsMap = new Dictionary<string, Expression<Func<Vehicle, object>>>()
-            {
-                ["make"] = v => v.Model.Make.Name,
-                ["model"] = v => v.Model.Name,
-                ["contactName"] = v => v.ContactName
-            };
-
-            query = query.ApplyOrdering(queryObj, columnsMap);
-
-            result.TotalItems = await query.CountAsync();
-
-            query = query.ApplyPaging(queryObj);
-
-            result.Items = await query.ToListAsync();
-
-            return result;
         }
+
+        //public async Task<QueryResult<Vehicle>> GetVehicles(VehicleQuery queryObj)
+        //{
+        //    var result = new QueryResult<Vehicle>();
+
+        //    var query = context.Vehicles
+        //      .Include(v => v.Model)
+        //        .ThenInclude(m => m.Make)
+        //      .Include(v => v.Features)
+        //        .ThenInclude(vf => vf.Feature)
+        //      .AsQueryable();
+
+        //    if (queryObj.MakeId.HasValue)
+        //        query = query.Where(v => v.Model.MakeId == queryObj.MakeId.Value);
+
+        //    if (queryObj.ModelId.HasValue)
+        //        query = query.Where(v => v.ModelId == queryObj.ModelId.Value);
+
+        //    var columnsMap = new Dictionary<string, Expression<Func<Vehicle, object>>>()
+        //    {
+        //        ["make"] = v => v.Model.Make.Name,
+        //        ["model"] = v => v.Model.Name,
+        //        ["contactName"] = v => v.ContactName
+        //    };
+
+        //    query = query.ApplyOrdering(queryObj, columnsMap);
+
+        //    result.TotalItems = await query.CountAsync();
+
+        //    query = query.ApplyPaging(queryObj);
+
+        //    result.Items = await query.ToListAsync();
+
+        //    return result;
+        //}
 
     }
 }

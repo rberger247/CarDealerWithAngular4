@@ -11,6 +11,7 @@ using vega.Core.Models;
 using vega.Models;
 using AThirdCarDealership.Persistence;
 using AThirdCarDealership.Extensions;
+using AThirdCarDealership.Core.Models;
 
 namespace vega.Persistence
 {
@@ -46,13 +47,19 @@ namespace vega.Persistence
             context.Remove(vehicle);
         }
 
-        public async Task<IEnumerable<Vehicle>> GetVehicles()
+        public async Task<IEnumerable<Vehicle>> GetVehicles(Filter filter)
         {
-            return await context.Vehicles.Include(v => v.Model)
+            var Query = context.Vehicles.Include(v => v.Model)
                 .ThenInclude(vf => vf.Make)
               .Include(m => m.Features)
                 .ThenInclude(m => m.Feature)
-             .ToListAsync();
+             .AsQueryable();
+
+            if (filter.MakeId.HasValue)
+                Query = Query.Where(v => v.Model.MakeId == filter.MakeId.Value);
+            return await  Query.ToListAsync();
+
+
 
         }
 

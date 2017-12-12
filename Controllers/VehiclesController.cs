@@ -245,6 +245,8 @@ using vega.Core.Models;
 using vega.Core;
 using vega.Models;
 using AThirdCarDealership.Core;
+using AThirdCarDealership.Core.Models;
+using AThirdCarDealership.Controllers.Resources;
 
 namespace vega.Controllers
 {
@@ -330,11 +332,19 @@ namespace vega.Controllers
 
             return Ok(vehicleResource);
         }
-        [HttpGet]
-        public async Task<IEnumerable<VehicleResource>> GetVehicles()
-        {
+        //[HttpGet]
+        //public async Task<IEnumerable<VehicleResource>> GetVehicles()
+        //{
 
-            var vehicles = await repository.GetVehicles();
+        //    var vehicles = await repository.GetVehicles();
+
+        //    return mapper.Map<IEnumerable<Vehicle>, IEnumerable<VehicleResource>>(vehicles);
+        //}
+        [HttpGet]
+        public async Task<IEnumerable<VehicleResource>> GetVehicles(FilterResource filterResource)
+        {
+            var filter = mapper.Map<FilterResource, Filter>(filterResource);
+            var vehicles = await repository.GetVehicles(filter);
 
             return mapper.Map<IEnumerable<Vehicle>, IEnumerable<VehicleResource>>(vehicles);
         }

@@ -65,6 +65,7 @@ using vega.Controllers.Resources;
 using vega.Models;
 using System.Linq;
 using vega.Core.Models;
+using AThirdCarDealership.Core.Models;
 
 namespace vega.Mapping
 {
@@ -73,6 +74,7 @@ namespace vega.Mapping
         public MappingProfile()
         {
             // Domain to API Resource
+        
             CreateMap(typeof(QueryResult<>), typeof(QueryResultResource<>));
             CreateMap<Make, MakeResource>();
             CreateMap<Make, KeyValuePairResource>();
@@ -87,6 +89,7 @@ namespace vega.Mapping
               .ForMember(vr => vr.Features, opt => opt.MapFrom(v => v.Features.Select(vf => new KeyValuePairResource { Id = vf.Feature.Id, Name = vf.Feature.Name })));
 
             // API Resource to Domain
+            CreateMap<FilterResource, Filter>();
             CreateMap<VehicleQueryResource, VehicleQuery>();
             CreateMap<SaveVehicleResource, Vehicle>()
               .ForMember(v => v.Id, opt => opt.Ignore())

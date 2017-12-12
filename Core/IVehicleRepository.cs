@@ -15,6 +15,7 @@
 //        void Remove(Vehicle vehicle);
 //    }
 //}
+using AThirdCarDealership.Core.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using vega.Core.Models;
@@ -28,6 +29,6 @@ namespace vega.Core
         void Add(Vehicle vehicle);
         void Remove(Vehicle vehicle);
         // Task<QueryResult<Vehicle>> GetVehicles(VehicleQuery filter);
-        Task<IEnumerable<Vehicle>> GetVehicles();
+        Task<IEnumerable<Vehicle>> GetVehicles(Filter filter);
     }
 }

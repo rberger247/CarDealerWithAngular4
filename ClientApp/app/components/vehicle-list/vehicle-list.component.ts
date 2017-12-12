@@ -22,7 +22,7 @@ export class VehicleListComponent implements OnInit {
       contact: {}
 
   };
-  allVehicles: Vehicle [];
+//  allVehicles: Vehicle [];
   queryResult: any = {};
   makes: KeyValuePair[];
   query: any = {
@@ -40,7 +40,7 @@ export class VehicleListComponent implements OnInit {
 
   ngOnInit() {
 
-      this.vehicleService.GetVehicles().subscribe(vehicles => this.vehicles = this.allVehicles = vehicles);
+    //  this.vehicleService.GetVehicles(this.filter).subscribe(vehicles => this.vehicles  = vehicles);
 
       //var sources = [
       //    this.vehicleService.getMakes(),
@@ -65,28 +65,37 @@ export class VehicleListComponent implements OnInit {
     this.vehicleService.getMakes()
       .subscribe(makes => this.makes = makes);
 
-  //  this.populateVehicles();
+    this.populateVehicles();
   }
 
-  //private populateVehicles() {
+  private populateVehicles() {
 
-  //    this.vehicleService.GetVehicles(vehicles  => this.vehicles = this.allVehicles = vehicles);
+      this.vehicleService.GetVehicles(this.filter).subscribe(vehicles  => this.vehicles  = vehicles);
 
-  //  this.vehicleService.GetVehicles(this.query)
-  //    .subscribe(result => this.queryResult = result);
-  //}
-
+    //this.vehicleService.GetVehicles(this.query)
+    //  .subscribe(result => this.queryResult = result);
+  }
   onFilterChange() {
-    //  this.filter.makeId;
-      var vehicles = this.allVehicles;
-      if (this.filter.makeId) {
+      this.populateVehicles();
 
-         vehicles = vehicles.filter(v => v.make.id == this.filter.makeId)
-      };
-      this.vehicles = vehicles;
-    //this.query.page = 1;
-    //this.populateVehicles();
+
+
   }
+  //onFilterChange() {
+
+  //  // this.filter.makeId;
+  //    var vehicles = this.allVehicles;
+  //    if (this.filter.makeId) {
+
+  //       vehicles = vehicles.filter(v => v.make.id == this.filter.makeId)
+  //    };
+  //    if (this.filter.modelId) {
+  //        v => v.model.id == this.filter.modelId;
+  //    }
+  //    this.vehicles = vehicles;
+  //  //this.query.page = 1;
+  //  //this.populateVehicles();
+  //}
 
   resetFilter() {
       this.filter = {};

@@ -162,23 +162,23 @@ export class VehicleFormComponent implements OnInit {
     makes: any[];
     models: any[];
     features: any[];
-    contact: any={};
+    contact: any = {};
 
     vehicle: any = {
         features: [],
         contact: {}
     };
-        //vehicle: SaveVehicle = {
-        //id: 0,
-        //makeId: 0,
-        //modelId: 0,
-        //isRegistered: false,
-        //features: [],
-        //contact: {
-        //    name: '',
-        //    email: '',
-        //    phone: '',
-        //}
+    //vehicle: SaveVehicle = {
+    //    id: 0,
+    //    makeId: 0,
+    //    modelId: 0,
+    //    isRegistered: false,
+    //    features: [],
+    //    contact: {
+    //        name: '',
+    //        email: '',
+    //        phone: '',
+    //    }
 
     //};
 
@@ -188,11 +188,11 @@ export class VehicleFormComponent implements OnInit {
         private route: ActivatedRoute,
         private router: Router) {
         route.params.subscribe(p => {
-            this.vehicle.id = +p['id'];
+            this.vehicle.id = +p['id'] || 0 ;
 
         }
 
-            )
+        )
     }
 
 
@@ -202,7 +202,7 @@ export class VehicleFormComponent implements OnInit {
         //    this.vehicleService.getMakes(),
         //    this.vehicleService.getFeatures(),
 
-           
+
         //];
         var sources = [
             this.vehicleService.getMakes(),
@@ -223,7 +223,7 @@ export class VehicleFormComponent implements OnInit {
         }, err => {
             if (err.status == 404)
                 this.router.navigate(['/home']);
-            });
+        });
 
         //if(this.vehicle.id)
 
@@ -233,7 +233,7 @@ export class VehicleFormComponent implements OnInit {
 
         //    });
         //-------------------------------------------------------------------------------------------
-              //    subscribe(data => {
+        //    subscribe(data => {
         //        this.makes = data[0];
         //        this.features = data[1];
         //        if(this.vehicle.id)
@@ -247,18 +247,18 @@ export class VehicleFormComponent implements OnInit {
 
     }
 
-        private setVehicle(v: Vehicle) {
+    private setVehicle(v: Vehicle) {
         this.vehicle.id = v.id;
         this.vehicle.makeId = v.make.id;
         this.vehicle.modelId = v.model.id;
         this.vehicle.isRegistered = v.isRegistered;
         this.vehicle.contact = v.contact;
         this.vehicle.features = _.pluck(v.features, 'id');
-        }
-        private populateModels() {
-            var selectedMake = this.makes.find(m => m.id == this.vehicle.makeId);
-            this.models = selectedMake ? selectedMake.models : [];
-        }
+    }
+    private populateModels() {
+        var selectedMake = this.makes.find(m => m.id == this.vehicle.makeId);
+        this.models = selectedMake ? selectedMake.models : [];
+    }
 
 
     onMakeChange() {
@@ -283,7 +283,7 @@ export class VehicleFormComponent implements OnInit {
     }
     delete() {
 
-        if (confirm ('are you sure ?')) {
+        if (confirm('are you sure ?')) {
 
             this.vehicleService.delete(this.vehicle.id).subscribe(x => {
 
@@ -296,27 +296,21 @@ export class VehicleFormComponent implements OnInit {
                 });
 
             });
-;
+            ;
         }
     }
     submit() {
-        if (this.vehicle.id)
-          
-
-        this.vehicleService.update(this.vehicle).subscribe(x => {
-         
+        var result$ = (this.vehicle.id) ? this.vehicleService.update(this.vehicle) : this.vehicleService.create(this.vehicle);
+        result$.subscribe(vehicle => {
             this.toastyService.success({
                 title: 'Success',
-                msg: ' updated.',
+                msg: 'Data was sucessfully saved.',
                 theme: 'bootstrap',
                 showClose: true,
                 timeout: 5000
             });
-                
-                });
-
-        
-    };
-        
+            this.router.navigate(['/vehicles/', vehicle.id])
+        });
     }
+}
 

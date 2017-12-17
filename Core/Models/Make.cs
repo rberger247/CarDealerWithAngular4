@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
-using AthirdCarDealership.Models;
+using AThirdCarDealership.Models;
 
-namespace thirdCarDealership.Models
+namespace AThirdCarDealership.Models
 {
     public class Make
     {

@@ -2,11 +2,18 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AThirdCarDealership.Persistence;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.Webpack;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using AutoMapper;
+using AThirdCarDealership.Core;
+using vega.Core;
+using vega.Persistence;
+using AThirdCarDealership.Core.Models;
 
 namespace AThirdCarDealership
 {
@@ -23,8 +30,13 @@ namespace AThirdCarDealership
         public void ConfigureServices(IServiceCollection services)
         {
 
-        //    services.AddDbContext<ApplicationDbContext>(options =>
-          //      options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            //services.AddTransient<IPhotoService, PhotoService>();
+            services.Configure<PhotoSettings>(Configuration.GetSection("PhotoSettings"));
+            services.AddScoped<IVehicleRepository, VehicleRepository>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddAutoMapper();
+            services.AddDbContext<VegaDbContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddMvc();
         }
 

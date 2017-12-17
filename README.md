@@ -24,6 +24,7 @@ Uses AutoMapper to map objects
 uses sentry.io to log all error messages
 uses angular Toasty to display user Friendly error messages;
 Uses Observable and forkJoin to send requests in parallel;
+Uploads photos;
 
 
 

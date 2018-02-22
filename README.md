@@ -2,7 +2,7 @@
 
  -----------Technologies, Languages And Frameworks----------------
 
-This is a console app in asp.Net core 2.0 ;
+This is a web app in asp.Net core 2.0 ;
 It uses EntityFrameworkCore to connect to SqlServer Database;
 
 add zone.js;
